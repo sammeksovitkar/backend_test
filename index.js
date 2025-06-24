@@ -1,6 +1,8 @@
 const express = require('express');
+const cors = require('cors'); // ✅ Import cors
 const app = express();
 
+app.use(cors()); // ✅ Enable CORS for all routes
 app.use(express.json());
 
 app.get('/api/hello', (req, res) => {
@@ -18,9 +20,8 @@ app.put('/api/update', (req, res) => {
 app.delete('/api/delete', (req, res) => {
   res.json({ message: 'Deleted successfully' });
 });
-console.log("sdf")
 
-// app.listen(3000,()=>console.log("listining in 3000"))
+// Vercel serverless function handler
 module.exports = (req, res) => {
-  app(req, res); // Vercel handler
+  app(req, res);
 };
